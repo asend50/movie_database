@@ -45,9 +45,9 @@ pub async fn run() -> String {
     let mut txt_title = TextInput::new(200.0, 300.0, 350.0, 55.0, 40.0);
     let mut txt_score = TextInput::new(200.0, 450.0, 350.0, 55.0, 40.0);
     let mut txt_category = TextInput::new(200.0, 600.0, 350.0, 55.0, 40.0);
-    txt_title.set_max_chars(15);
-    txt_score.set_max_chars(15);
-    txt_category.set_max_chars(15);
+    txt_title.set_max_chars(19);
+    txt_score.set_max_chars(19);
+    txt_category.set_max_chars(19);
 
     let client = create_database_client();
     loop {
@@ -76,7 +76,6 @@ pub async fn run() -> String {
                 records = result;
             }
             for i in &records {
-                println!("ID: {}, Title: {}, Score: {}, Category: {}", i.id, i.title, i.score, i.category);
                 if txt_title.get_text() == i.title && txt_score.get_text() == i.score && txt_category.get_text() == i.category {
                     if let Ok(deleted_count) = client.delete_record_by_id("movies", i.id as i64).await {
                         // deleted_count is the number of records deleted

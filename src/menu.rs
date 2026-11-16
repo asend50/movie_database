@@ -48,6 +48,17 @@ pub async fn run() -> String {
         30
     );
 
+    let btn_display = TextButton::new(
+        400.0,
+        650.0,
+        200.0,
+        60.0,
+        "Display",
+        ORANGE,
+        YELLOW,
+        30
+    );
+
     loop {
         clear_background(BLUE);
 
@@ -65,6 +76,10 @@ pub async fn run() -> String {
 
         if btn_update.click() {
             return "update".to_string();
+        }
+
+        if btn_display.click() {
+            return "display".to_string();
         }
 
         if is_key_pressed(KeyCode::Space) {

@@ -10,6 +10,7 @@ mod menu;
 mod create;
 mod delete;
 mod update;
+mod display;
 
 
 use macroquad::prelude::*;
@@ -40,6 +41,7 @@ async fn main() {
                 "create" => create::run().await,
                 "delete" => delete::run().await,
                 "update" => update::run().await,
+                "display" => display::run().await,
                 _ => break,
             };
             last_switch = get_time();

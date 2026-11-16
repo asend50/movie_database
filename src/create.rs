@@ -45,9 +45,9 @@ pub async fn run() -> String {
     let mut txt_title = TextInput::new(200.0, 300.0, 350.0, 55.0, 40.0);
     let mut txt_score = TextInput::new(200.0, 450.0, 350.0, 55.0, 40.0);
     let mut txt_category = TextInput::new(200.0, 600.0, 350.0, 55.0, 40.0);
-    txt_title.set_max_chars(15);
-    txt_score.set_max_chars(15);
-    txt_category.set_max_chars(15);
+    txt_title.set_max_chars(19);
+    txt_score.set_max_chars(19);
+    txt_category.set_max_chars(19);
 
     let client = create_database_client();
     loop {
