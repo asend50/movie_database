@@ -159,7 +159,7 @@ pub const WORKER_URL: &str = "https://flat-wave-df02.asend50.workers.dev/";
 /// #[derive(Debug, Deserialize, Serialize, Clone)]
 /// pub struct DatabaseTable {
 ///     #[serde(default, skip_serializing_if = "is_zero")]
-///     pub id: i32,    
+///     pub id: i32,
 ///     pub email: String,
 ///     pub age: i32,
 ///     pub active: bool,
@@ -171,7 +171,7 @@ pub struct DatabaseTable {
     pub id: i32,
     pub title: String,
     pub score: String,
-    pub category: String,
+    pub category: String
     // Example: Add more fields like this:
     // pub email: String,
     // pub age: i32,
