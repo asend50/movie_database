@@ -21,7 +21,7 @@ pub async fn run(tm: TextureManager) -> (String, TextureManager) {
 
     let mut btn_search = TextButton::new(
         700.0,
-        110.0,
+        360.0,
         100.0,
         60.0,
         "Search",
@@ -52,16 +52,16 @@ pub async fn run(tm: TextureManager) -> (String, TextureManager) {
         30
     );
 
-    let lbl_titles = Label::new("Movie Titles:", 100.0, 275.0, 70);
-    let lbl_sections = Label::new("| Title: | Score: | Category: |", 100.0, 325.0, 50);
-    let lbl_search = Label::new("Search:", 150.0, 150.0, 50);
-    let mut txt_search = TextInput::new(325.0, 110.0, 350.0, 55.0, 40.0);
+    let lbl_titles = Label::new("Movie Titles:", 100.0, 475.0, 70);
+    let lbl_sections = Label::new("| Title: | Score: | Category: |", 100.0, 525.0, 40);
+    let lbl_search = Label::new("Search:", 150.0, 400.0, 50);
+    let mut txt_search = TextInput::new(325.0, 360.0, 350.0, 55.0, 30.0);
     txt_search.set_max_chars(19);
 
     let client = create_database_client();
 
     let mut items = vec![];
-    let mut list_view = ListView::new(&items, 100.0, 375.0, 45);
+    let mut list_view = ListView::new(&items, 100.0, 575.0, 35);
 
     let mut records: Vec<DatabaseTable> = Vec::new();
             let fetched_results = client.fetch_table("movies").await;
