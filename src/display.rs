@@ -25,8 +25,8 @@ pub async fn run(tm: TextureManager) -> (String, TextureManager) {
         100.0,
         60.0,
         "Search",
-        RED,
-        ORANGE,
+        BLACK,
+        GRAY,
         30
     );
 
