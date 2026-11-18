@@ -11,6 +11,7 @@ mod create;
 mod delete;
 mod update;
 mod display;
+use crate::utils::preload_image::TextureManager;
 
 
 use macroquad::prelude::*;
@@ -31,17 +32,21 @@ fn window_conf() -> Conf {
 
 #[macroquad::main(window_conf)]
 async fn main() {
+
+    let mut tm = TextureManager::new();
+    tm.preload_with_loading_screen(&["assets/menu.png","assets/create.png", "assets/delete.png", "assets/update.png", "assets/search.png",], None, None).await;
+
     let mut current_screen = "menu".to_string();
     let mut last_switch = get_time() - 0.02;
 
     loop {
         if get_time() - last_switch > 0.01 {
-            current_screen = match current_screen.as_str() {
-                "menu" => menu::run().await,
-                "create" => create::run().await,
-                "delete" => delete::run().await,
-                "update" => update::run().await,
-                "display" => display::run().await,
+            (current_screen, tm) = match current_screen.as_str() {
+                "menu" => menu::run(tm).await,
+                "create" => create::run(tm).await,
+                "delete" => delete::run(tm).await,
+                "update" => update::run(tm).await,
+                "display" => display::run(tm).await,
                 _ => break,
             };
             last_switch = get_time();

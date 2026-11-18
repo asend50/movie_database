@@ -3,17 +3,29 @@ use crate::utils::database::{create_database_client, DatabaseTable};
 use crate::ui::label::Label;
 use crate::ui::text_button::TextButton;
 use crate::ui::text_input::TextInput;
+use crate::ui::still_image::StillImage;
+use crate::utils::preload_image::TextureManager;
 
-pub async fn run() -> String {
+pub async fn run(tm: TextureManager) -> (String, TextureManager) {
+
+    let update= StillImage::from_preload(
+    tm.get_preload("assets/update.png").unwrap(),
+    screen_width(),  // Width
+    screen_height(), // Height
+    0.0,                   // X position
+    0.0,                   // Y position
+    true,                  // Enable stretching
+    1.0,                   // Zoom level (100%)
+);
 
     let mut btn_update = TextButton::new(
         400.0,
-        700.0,
+        800.0,
         200.0,
         60.0,
         "Update",
-        RED,
-        ORANGE,
+        BLACK,
+        GRAY,
         30
     );
 
@@ -39,18 +51,20 @@ pub async fn run() -> String {
         30
     );
 
-    let lbl_title = Label::new("Old Movie Title:", 100.0, 275.0, 40);
-    let lbl_score = Label::new("Old Movie Score:", 100.0, 425.0, 40);
-    let lbl_category = Label::new("Old Movie Category:", 100.0, 575.0, 40);
-    let lbl_updatetitle = Label::new("New Movie Title:", 550.0, 275.0, 40);
-    let lbl_updatescore = Label::new("New Movie Score:", 550.0, 425.0, 40);
-    let lbl_updatecategory = Label::new("New Movie Category:", 550.0, 575.0, 40);
-    let mut txt_title = TextInput::new(100.0, 300.0, 350.0, 55.0, 40.0);
-    let mut txt_score = TextInput::new(100.0, 450.0, 350.0, 55.0, 40.0);
-    let mut txt_category = TextInput::new(100.0, 600.0, 350.0, 55.0, 40.0);
-    let mut txt_updatetitle = TextInput::new(550.0, 300.0, 350.0, 55.0, 40.0);
-    let mut txt_updatescore = TextInput::new(550.0, 450.0, 350.0, 55.0, 40.0);
-    let mut txt_updatecategory = TextInput::new(550.0, 600.0, 350.0, 55.0, 40.0);
+    let lbl_title = Label::new("Old Movie Title:", 100.0, 400.0, 40);
+    let lbl_score = Label::new("Old Movie Score:", 100.0, 525.0, 40);
+    let lbl_category = Label::new("Old Movie Category:", 100.0, 650.0, 40);
+    let lbl_updatetitle = Label::new("New Movie Title:", 550.0, 400.0, 40);
+    let lbl_updatescore = Label::new("New Movie Score:", 550.0, 525.0, 40);
+    let lbl_updatecategory = Label::new("New Movie Category:", 550.0, 650.0, 40);
+    let mut txt_title = TextInput::new(100.0, 425.0, 350.0, 55.0, 40.0);
+    let mut txt_score = TextInput::new(100.0, 550.0, 350.0, 55.0, 40.0);
+    txt_score.set_allowed_chars("0123456789.");
+    let mut txt_category = TextInput::new(100.0, 675.0, 350.0, 55.0, 40.0);
+    let mut txt_updatetitle = TextInput::new(550.0, 425.0, 350.0, 55.0, 40.0);
+    let mut txt_updatescore = TextInput::new(550.0, 550.0, 350.0, 55.0, 40.0);
+    txt_updatescore.set_allowed_chars("0123456789.");
+    let mut txt_updatecategory = TextInput::new(550.0, 675.0, 350.0, 55.0, 40.0);
     txt_title.set_max_chars(19);
     txt_score.set_max_chars(19);
     txt_category.set_max_chars(19);
@@ -59,14 +73,15 @@ pub async fn run() -> String {
     txt_updatecategory.set_max_chars(19);
     let client = create_database_client();
     loop {
-        clear_background(DARKGRAY);
+        clear_background(WHITE);
+        update.draw();
 
         if btn_exit.click() {
-            return "".to_string();
+            return ("".to_string(), tm);
         }
 
         if btn_return.click() {
-            return "menu".to_string();
+            return ("menu".to_string(), tm);
         }
 
         if !txt_title.get_text().trim().is_empty() &&
