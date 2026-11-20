@@ -65,12 +65,12 @@ pub async fn run(tm: TextureManager) -> (String, TextureManager) {
     let mut txt_updatescore = TextInput::new(550.0, 550.0, 350.0, 55.0, 40.0);
     txt_updatescore.set_allowed_chars("0123456789.");
     let mut txt_updatecategory = TextInput::new(550.0, 675.0, 350.0, 55.0, 40.0);
-    txt_title.set_max_chars(19);
-    txt_score.set_max_chars(19);
-    txt_category.set_max_chars(19);
+    txt_title.set_max_chars(18);
+    txt_score.set_max_chars(3);
+    txt_category.set_max_chars(5);
     txt_updatetitle.set_max_chars(19);
-    txt_updatescore.set_max_chars(19);
-    txt_updatecategory.set_max_chars(19);
+    txt_updatescore.set_max_chars(3);
+    txt_updatecategory.set_max_chars(5);
     let client = create_database_client();
     loop {
         clear_background(WHITE);

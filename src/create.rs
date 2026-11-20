@@ -58,9 +58,9 @@ pub async fn run(tm: TextureManager) -> (String, TextureManager) {
     let mut txt_score = TextInput::new(200.0, 550.0, 350.0, 55.0, 40.0);
     txt_score.set_allowed_chars("0123456789.");
     let mut txt_category = TextInput::new(200.0, 675.0, 350.0, 55.0, 40.0);
-    txt_title.set_max_chars(19);
-    txt_score.set_max_chars(19);
-    txt_category.set_max_chars(19);
+    txt_title.set_max_chars(18);
+    txt_score.set_max_chars(3);
+    txt_category.set_max_chars(5);
 
     let client = create_database_client();
     loop {

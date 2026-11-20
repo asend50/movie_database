@@ -56,16 +56,16 @@ pub async fn run(tm: TextureManager) -> (String, TextureManager) {
     let lbl_sections = Label::new("| Title: | Score: | Category: |", 250.0, 525.0, 40);
     let lbl_search = Label::new("Search:", 150.0, 400.0, 50);
     let mut txt_search = TextInput::new(325.0, 360.0, 350.0, 55.0, 30.0);
-    txt_search.set_max_chars(19);
+    txt_search.set_max_chars(18);
 
     let client = create_database_client();
 
     let mut items = vec![];
-    let mut list_view = ListView::new(&items, 250.0, 585.0, 45);
+    let mut list_view = ListView::new(&items, 250.0, 585.0, 34);
     list_view.set_width(550.0);
     list_view.with_border(BLACK, 8.0);
     list_view.with_colors(BLACK, Some(LIGHTGRAY), Some(BLUE));
-    list_view.with_max_visible_items(7);
+    list_view.with_max_visible_items(9);
 
     let mut records: Vec<DatabaseTable> = Vec::new();
             let fetched_results = client.fetch_table("movies").await;
